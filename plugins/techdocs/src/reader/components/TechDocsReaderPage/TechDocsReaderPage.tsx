@@ -205,19 +205,13 @@ export const TechDocsReaderPage = (props: TechDocsReaderPageProps) => {
   const navigate = useNavigate();
   const viewTechdocLink = useRouteRef(rootDocsRouteRef);
 
-  const {
-    kind: entityKind,
-    name: entityName,
-    namespace: entityNamespace,
-  } = entityRef;
-
   const memoizedEntityRef = useMemo(
     () => ({
-      kind: entityKind,
-      name: entityName,
-      namespace: entityNamespace,
+      kind: entityRef.kind,
+      name: entityRef.name,
+      namespace: entityRef.namespace,
     }),
-    [entityKind, entityName, entityNamespace],
+    [entityRef.kind, entityRef.name, entityRef.namespace],
   );
 
   const externalEntityTechDocsUrl = useAsync(async () => {
