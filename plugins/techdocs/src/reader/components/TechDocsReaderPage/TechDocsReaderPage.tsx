@@ -247,8 +247,10 @@ export const TechDocsReaderPage = (props: TechDocsReaderPageProps) => {
     handleNavigation,
   ]);
 
-  const processedChildren = useMemo(() => {
-    if (children) return null;
+  const page: ReactNode = useMemo(() => {
+    if (children) {
+      return null;
+    }
 
     const childrenList = outlet ? Children.toArray(outlet.props.children) : [];
 
@@ -267,18 +269,20 @@ export const TechDocsReaderPage = (props: TechDocsReaderPageProps) => {
     return <Progress />;
   }
 
+  // As explained above, "page" is configuration 4 and <TechDocsReaderLayout> is 1
   if (!children) {
     return (
       <ThemeProvider theme={readerPageTheme}>
         <CookieAuthRefreshProvider pluginId="techdocs">
           <TechDocsReaderPageProvider entityRef={memoizedEntityRef}>
-            {(processedChildren as JSX.Element) || <TechDocsReaderLayout />}
+            {(page as JSX.Element) || <TechDocsReaderLayout />}
           </TechDocsReaderPageProvider>
         </CookieAuthRefreshProvider>
       </ThemeProvider>
     );
   }
 
+  // As explained above, a render function is configuration 3 and React element is 2
   return (
     <ThemeProvider theme={readerPageTheme}>
       <CookieAuthRefreshProvider pluginId="techdocs">
